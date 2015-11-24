@@ -1,7 +1,12 @@
 # coding=utf-8
-import urllib2, re, sys, threading, time
+#ruisi.py是单线程，会被sum.py调用
+#实现多线程在 sum.py 里面实现
+#usage: python ruisi.py <startNum> <endNum>
+import urllib2, re, sys, time
 
-
+# myurl as 指定链接
+# seWord as 正则表达式，用unicode表示
+# 返回根据正则表达式匹配的信息或者None
 def getInfo(myurl, seWord):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6'
@@ -21,6 +26,8 @@ def getInfo(myurl, seWord):
     else:
         return None
 
+#尝试两次getInfo()
+#第2次失败后，就把这个id标记为httperror
 def safeGet(myid, myurl, seWord):
     try:
         return getInfo(myurl, seWord)
@@ -35,6 +42,7 @@ def safeGet(myid, myurl, seWord):
             return 'httperror'
 
 
+#输出一个 idArr 范围，比如[1,1001)
 def searchWeb(idArr):
     for id in idArr:
         sexUrl = url1 % (id)
@@ -89,11 +97,11 @@ def main():
     notexistRe = re.compile(u'(p>)\u62b1\u6b49\uff0c\u60a8\u6307\u5b9a\u7684\u7528\u6237\u7a7a\u95f4\u4e0d\u5b58\u5728<')
     url1 = 'http://rs.xidian.edu.cn/home.php?mod=space&uid=%s'
     url2 = 'http://rs.xidian.edu.cn/home.php?mod=space&uid=%s&do=profile'
-    file1 = 'ruisi\\correct%s-%s.txt' % (startNum, endNum)
-    file2 = 'ruisi\\errTime%s-%s.txt' % (startNum, endNum)
-    file3 = 'ruisi\\notexist%s-%s.txt' % (startNum, endNum)
-    file4 = 'ruisi\\unkownsex%s-%s.txt' % (startNum, endNum)
-    file5 = 'ruisi\\httperror%s-%s.txt' % (startNum, endNum)
+    file1 = '..\\newnew\\correct%s-%s.txt' % (startNum, endNum)
+    file2 = '..\\newnew\\errTime%s-%s.txt' % (startNum, endNum)
+    file3 = '..\\newnew\\notexist%s-%s.txt' % (startNum, endNum)
+    file4 = '..\\newnew\\unkownsex%s-%s.txt' % (startNum, endNum)
+    file5 = '..\\newnew\\httperror%s-%s.txt' % (startNum, endNum)
     searchWeb(xrange(startNum,endNum))
     # numThread = 10
     # searchWeb(xrange(endNum))
@@ -104,7 +112,6 @@ def main():
     #     t=threading.Thread(target=searchWeb,args=(data,))
     #     t.start()
     # print total
-
 
 main()
 
