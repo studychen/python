@@ -1,4 +1,6 @@
 # coding=utf-8
+#这儿是针对httperror的id进行重新爬虫
+#代码和ruisi.py很像
 import urllib2, re, sys, time,os
 
 
@@ -83,11 +85,11 @@ def main():
     notexistRe = re.compile(u'(p>)\u62b1\u6b49\uff0c\u60a8\u6307\u5b9a\u7684\u7528\u6237\u7a7a\u95f4\u4e0d\u5b58\u5728<')
     url1 = 'http://rs.xidian.edu.cn/home.php?mod=space&uid=%s'
     url2 = 'http://rs.xidian.edu.cn/home.php?mod=space&uid=%s&do=profile'
-    file1 = 'ruisi\\correct_re.txt'
-    file2 = 'ruisi\\errTime_re.txt'
-    file3 = 'ruisi\\notexist_re.txt'
-    file4 = 'ruisi\\unkownsex_re.txt'
-    file5 = 'ruisi\\httperror_re.txt'
+    file1 = '..\\newnew\\correct_re.txt'
+    file2 = '..\\newnew\\errTime_re.txt'
+    file3 = '..\\newnew\\notexist_re.txt'
+    file4 = '..\\newnew\\unkownsex_re.txt'
+    file5 = '..\\newnew\\httperror_re.txt'
 
     for filename in os.listdir(r'E:\pythonProject\ruisi'):
         if filename.startswith('httperror'):
@@ -95,15 +97,14 @@ def main():
             newName = 'E:\\pythonProject\\ruisi\\%s' % (filename)
             readFile = open(newName,'r')
             oldLine = '0'
-            for line in open(newName):
-                newLine =  readFile.readline()
+            for line in readFile:
+                newLine =  line
                 if (newLine != oldLine):
                     nu = newLine.split()[0]
                     oldLine = newLine
                     count += 1
                     searchWeb((int(nu),))
             print "%s deal %s lines" %(filename, count)
-
 
     # searchWeb(xrange(startNum,endNum))
     # numThread = 10
