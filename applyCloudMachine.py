@@ -1,4 +1,4 @@
-__author__ = 'I316736'
+__author__ = 'tomchen'
 import threading
 import subprocess
 import sys
@@ -60,10 +60,10 @@ def prepare():
     print '==========ip2 '+ ip2 +' =========='
     sidDowncase = 'pi1'
     sidUppercase = 'PI1'
-    asePort1 = '4901'
-    asePort2 = '4901'
-    instanceNum = '00'
-    winIp = '10.173.0.44'
+    asePort1 = '****'
+    asePort2 = '****'
+    instanceNum = '**'
+    winIp = '10.173.**.***'
     masterPath='/hadr/packages/master_702'
     print '==========init variables end=========='
 
